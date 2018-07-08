@@ -27,8 +27,8 @@ const addEntities = (entities) => (schema, processedEntity, value, parent, key) 
 
   const existingEntity = entities[schemaKey][id];
   if (existingEntity) {
-    entities[schemaKey][id] = schema.merge(existingEntity, processedEntity);
-  } else {
+    entities[schemaKey][id] = typeof existingEntity == 'object' && typeof processedEntity == 'object' ? schema.merge(existingEntity, processedEntity) : existingEntity == processedEntity ? processedEntity : entities[schemaKey][id];
+   } else {
     entities[schemaKey][id] = processedEntity;
   }
 };
